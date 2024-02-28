@@ -1,0 +1,9 @@
+body {
+    background-color: rgb(14, 13, 13) /* Utiliza el código de color hexadecimal para el azul claro */
+}
+header {
+    background-image: url("Proyecto Redes\images\E9vGDBtXsAQWuDo.jpg_large"); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el encabezado */
+    height: 200px; /* Altura del encabezado */
+    text-align: center; /* Centra cualquier contenido dentro del encabezado si es necesario */
+}
