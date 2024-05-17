@@ -189,93 +189,65 @@
     <section class="bg-primary text-light p-5 text-center text-sm-start my-5">
       <div class="container">
         <span class="d-block p-2 text-bg-primary ">
-          <h1 class="fw-bold fs-2 container-fluid text-center ">¡Te toca contarnos!</h1>
+          <h1 class="fw-bold fs-2 container-fluid text-center ">Añadir Juegos</h1>
         </span>
-        <div class="container text-center">
+        <form id="postDataForm">  <div class="container text-center">
           <div class="row align-items-start">
             <div class="col">
-              <h3>¿Cual Es Tu Juego Favorito?</h3>
-              <select class="form-select" aria-label="Default select example">
-                <option selected>Selecciona tu favorito</option>
-                <option value="1">Sonic Adventure</option>
-                <option value="2">Sonic Adventure 2</option>
-                <option value="3">Sonic Unleashed</option>
-                <option value="4">Sonic Frontiers</option>
-              </select>
+              <h3>Ingresa El Nombre</h3>
+              <div class="input-group input-group-sm mb-3">
+                
+                
+                <input type="name" class="form-control" id="name" name="name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              </div>
+            </div>
+             <div class="col">
+              <h3>Ingresa el año de lanzamiento</h3>
+              <div class="input-group input-group-sm mb-3">
+                
+                <input type="year" class="form-control" id="year" name="year" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+              </div>
             </div>
             <div class="col">
-              <h3>¿Quien es tu personaje Favorito?</h3>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                <label class="form-check-label" for="flexRadioDefault1">
-                  Sonic
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Tails
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Knuckles
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Amy
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" >
-                <label class="form-check-label" for="flexRadioDefault2">
-                  Shadow
-                </label>
-              </div>
-
-            </div>
-            <div class="col">
-              <h3>¿Que aspectos te gustan de los juegos?</h3>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                  Velocidad
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                  Musica
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                  Diseño de niveles
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                  Personajes
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                  Jugabilidad
-                </label>
+              <h3>Ingresa la o las plataformas</h3>
+              <div class="input-group input-group-sm mb-3">
+                
+                <input type="platform" class="form-control" id="platform" name="platform" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
               </div>
             </div>
-            <button type="button" class="btn btn-light">Enviar</button>
+            <button type="submit" class="btn btn-light">Enviar</button>
           </div>
-          
         </div>
-
       </div>
+</form>
+<script>
+  document.getElementById('postDataForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      const formData = new FormData(this);
+      const jsonData = {};
+      formData.forEach((value, key) => {
+          jsonData[key] = value;
+      });
+
+      //Promesa
+      fetch('http://localhost:8000/games', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(jsonData)
+      })
+      .then(response => response.json())
+      .then(data => {
+          console.log('Respuesta:', data);
+          alert('Datos enviados correctamente!');
+      })
+      .catch(error => {
+          console.error('Error enviando datos:', error);
+      });
+  });
+</script>
 
     </section>
     <span class="d-block p-2 text-bg-dark bg-body-tertiary text-dark ">
